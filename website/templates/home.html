@@ -1,21 +1,60 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
-<form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+
+<style>
+  .noteBox {
+    border-radius: 18px;
+    padding: 18px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  textarea::placeholder {
+    letter-spacing: 0.1rem;
+  }
+
+  .myTxtArea {
+    outline: none;
+    padding: 11px 17px;
+    resize: horizontal;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 11px;
+  }
+  .list-group-flush{
+    margin-bottom: 11px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .list-group-flush li{
+    background-color: antiquewhite;
+    overflow: hidden;
+  }
+</style>
+
+<h1 align="center" style="margin: 13px auto; margin-bottom: 33px;"">Notes</h1>
+
+<div class=" noteBox">
+  <ul class=" list-group list-group-flush" id="notes">
+    
+    {% for note in user.notes %}
+    <li class="list-group-item">
+      
+      {{ note.data }}
+      <button type="button" class="close" onClick="deleteNote({{ note.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </li>
+    
+    {% endfor %}
+  </ul>
+  <form method="POST">
+    <textarea name="note" id="note" class="myTxtArea" placeholder="Enter Note..."></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+  </form>
   </div>
-</form>
-{% endblock %}
+  {% endblock %}
